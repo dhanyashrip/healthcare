@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vatsalya Care - Home</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Times New Roman", Times, serif;
+    background:#f5fbfb;
+    color:#333;
+    overflow-x:hidden;
+}
+
+/* TOP RIGHT BACK ARROW */
+
+.top-back{
+    position:fixed;
+    top:25px;
+    right:25px;
+    z-index:1000;
+}
+
+.top-back a{
+    text-decoration:none;
+}
+
+.top-back button{
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255, 255, 255, 0.103);
+    backdrop-filter:blur(10px);
+    color:rgb(6, 6, 6);
+    font-size:30px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.25);
+}
+
+.top-back button:hover{
+    transform:scale(1.1);
+    background:rgba(255, 255, 255, 0.228);
+}
+
+/* HERO SECTION */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),
+    url('1.jpeg') center/cover no-repeat;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    padding:20px;
+    position:relative;
+}
+
+.hero-content{
+    max-width:800px;
+    animation:fadeIn 2s ease;
+}
+
+.hero-content h1{
+    font-size:72px;
+    margin-bottom:25px;
+    letter-spacing:1px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.hero-content p{
+    font-size:24px;
+    line-height:1.9;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* FLOATING INFO */
+
+.floating-box{
+    position:absolute;
+    bottom:40px;
+    display:flex;
+    gap:12px;
+    flex-wrap:nowrap;
+    justify-content:center;
+}
+
+.float-card{
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(10px);
+    padding:12px 18px;
+    border-radius:12px;
+    color:white;
+    min-width:140px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    font-family:"Times New Roman", Times, serif;
+}
+
+.float-card h3{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.float-card p{
+    font-size:15px;
+}
+
+/* ABOUT SECTION */
+
+.about{
+    padding:90px 10%;
+    background:white;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:50px;
+    color:#0f3d3e;
+    margin-bottom:15px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.section-title p{
+    font-size:22px;
+    color:#666;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.about-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about-text{
+    font-size:22px;
+    line-height:2;
+    color:#444;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.about-image{
+    background:linear-gradient(135deg,#dff6f0,#bfeee4);
+    padding:50px;
+    border-radius:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.about-image h3{
+    font-size:38px;
+    color:#0f3d3e;
+    margin-bottom:25px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.about-image p{
+    font-size:21px;
+    line-height:2;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* SERVICES */
+
+.services{
+    padding:90px 10%;
+    background:#eef8f7;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.service-card{
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    transition:0.4s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.service-card:hover{
+    transform:translateY(-12px);
+}
+
+.service-icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.service-card h3{
+    color:#0f3d3e;
+    font-size:32px;
+    margin-bottom:15px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.service-card p{
+    font-size:20px;
+    line-height:1.8;
+    color:#555;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* WHY US */
+
+.why{
+    padding:90px 10%;
+    background:white;
+}
+
+.why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.why-card{
+    background:#f8ffff;
+    padding:35px;
+    border-left:6px solid #2f847dd4;
+    border-radius:18px;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.why-card:hover{
+    transform:scale(1.04);
+}
+
+.why-card h3{
+    margin-bottom:15px;
+    color:#0f3d3e;
+    font-size:30px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.why-card p{
+    line-height:1.8;
+    font-size:20px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* CONTACT */
+
+.contact{
+    padding:80px 10%;
+    background:linear-gradient(135deg,#0f3d3e,#14585b);
+    color:white;
+    text-align:center;
+}
+
+.contact h2{
+    font-size:52px;
+    margin-bottom:30px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+.contact p{
+    font-size:24px;
+    margin-bottom:18px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* FOOTER */
+
+footer{
+    background:#082728;
+    color:white;
+    text-align:center;
+    padding:22px;
+    font-size:18px;
+    font-family:"Times New Roman", Times, serif;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .hero-content h1{
+        font-size:48px;
+    }
+
+    .hero-content p{
+        font-size:20px;
+    }
+
+    .about-container{
+        grid-template-columns:1fr;
+    }
+
+    .section-title h2{
+        font-size:40px;
+    }
+
+    .top-back{
+        top:15px;
+        right:15px;
+    }
+
+    .top-back button{
+        width:48px;
+        height:48px;
+        font-size:26px;
+    }
+
+    .floating-box{
+        flex-wrap:wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP RIGHT BACK ARROW -->
+
+<div class="top-back">
+<a href="index.html">
+<button>⬅</button>
+</a>
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>VATSALYA CARE</h1>
+
+<p>
+Providing compassionate healthcare and elderly support services at home 
+with trusted caregivers, nurses, physiotherapists, and recovery experts.
+</p>
+
+</div>
+
+<div class="floating-box">
+
+<div class="float-card">
+<h3>24/7</h3>
+<p>Emergency Support</p>
+</div>
+
+<div class="float-card">
+<h3>100+</h3>
+<p>Trusted Caregivers</p>
+</div>
+
+<div class="float-card">
+<h3>500+</h3>
+<p>Happy Families</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about">
+
+<div class="section-title">
+
+<h2>About Vatsalya Care</h2>
+
+<p>
+Trusted healthcare assistance for senior citizens and patients.
+</p>
+
+</div>
+
+<div class="about-container">
+
+<div class="about-text">
+
+<p>
+Vatsalya Care is a healthcare platform dedicated to delivering safe, 
+professional, and compassionate home healthcare services. We help families 
+connect with trained nurses, attendants, physiotherapists, and post-hospital 
+care specialists for personalized support at home.
+</p>
+
+<br>
+
+<p>
+Our mission is to ensure comfort, dignity, recovery, and emotional support 
+for every patient through reliable and affordable healthcare services.
+</p>
+
+</div>
+
+<div class="about-image">
+
+<h3>Why Families Trust Us</h3>
+
+<p>
+✔ Experienced Professionals <br><br>
+✔ Personalized Healthcare Plans <br><br>
+✔ Fast & Easy Service Booking <br><br>
+✔ Compassionate Elderly Care <br><br>
+✔ Reliable Home Assistance
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services">
+
+<div class="section-title">
+
+<h2>Our Healthcare Services</h2>
+
+<p>
+Comprehensive healthcare support for elderly and patients.
+</p>
+
+</div>
+
+<div class="service-grid">
+
+<div class="service-card">
+
+<div class="service-icon">🩺</div>
+
+<h3>Nursing Care</h3>
+
+<p>
+Professional nursing support including medication assistance, injections, 
+vital monitoring, wound dressing, and medical care at home.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<div class="service-icon">👴</div>
+
+<h3>Elderly Attendant</h3>
+
+<p>
+Daily support services for senior citizens including companionship, 
+meal support, mobility assistance, and personal care.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<div class="service-icon">💪</div>
+
+<h3>Physiotherapy</h3>
+
+<p>
+Expert physiotherapy sessions for rehabilitation, mobility improvement, 
+pain relief, and post-surgery recovery.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<div class="service-icon">🏥</div>
+
+<h3>Post-Hospital Care</h3>
+
+<p>
+Specialized care after hospital discharge with recovery monitoring, 
+medical supervision, and continuous support.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY CHOOSE -->
+
+<section class="why">
+
+<div class="section-title">
+
+<h2>Why Choose Vatsalya Care</h2>
+
+<p>
+Professional healthcare services designed with compassion and trust.
+</p>
+
+</div>
+
+<div class="why-grid">
+
+<div class="why-card">
+<h3>Verified Professionals</h3>
+<p>
+All caregivers and nurses are experienced, trained, and verified.
+</p>
+</div>
+
+<div class="why-card">
+<h3>Affordable Services</h3>
+<p>
+High-quality healthcare services at affordable and transparent pricing.
+</p>
+</div>
+
+<div class="why-card">
+<h3>Easy Booking</h3>
+<p>
+Quick and smooth service booking process for patient convenience.
+</p>
+</div>
+
+<div class="why-card">
+<h3>24/7 Support</h3>
+<p>
+Dedicated healthcare assistance available anytime for emergencies.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+© 2026 Vatsalya Care | Trusted Home Healthcare Services
+
+</footer>
+
+</body>
+</html>

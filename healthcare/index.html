@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vatsalya Care</title>
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+  font-family:'Times New Roman', serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 60px;
+  z-index:1000;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(8px);
+}
+
+/* LOGO */
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.logo-image img{
+  width:78px;
+  height:78px;
+  object-fit:contain;
+  border-radius:50%;
+  background:white;
+  padding:4px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.25);
+}
+
+.logo-text{
+  display:flex;
+  flex-direction:column;
+}
+
+.logo-text h2{
+  color:white;
+  font-size:34px;
+  font-family:'Cinzel', serif;
+  letter-spacing:3px;
+  font-weight:700;
+  line-height:1;
+  text-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+
+.logo-text span{
+  color:#d8f3f2;
+  font-size:13px;
+  letter-spacing:4px;
+  margin-top:6px;
+  font-family:'Poppins', sans-serif;
+}
+
+/* NAV LINKS */
+
+nav ul{
+  display:flex;
+  gap:25px;
+}
+
+nav ul li{
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:white;
+  font-size:18px;
+  transition:0.3s;
+}
+
+nav ul li a:hover{
+  color:#3aafa9;
+}
+
+/* HERO SECTION */
+
+.hero{
+  height:100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+  url('elderly.jpg') no-repeat center/cover;
+
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+/* HERO CONTENT */
+
+.hero-content{
+  color:white;
+  max-width:700px;
+  margin-left:80px;
+  animation:slideUp 1.2s ease;
+}
+
+.hero-content h1{
+  font-size:65px;
+  margin-bottom:20px;
+  font-weight:bold;
+  text-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
+
+.hero-content p{
+  margin-bottom:35px;
+  line-height:1.8;
+  font-size:23px;
+}
+
+/* LOGIN BUTTON */
+
+.login-btn{
+  display:inline-block;
+  padding:15px 38px;
+  background:#3aafa9;
+  color:white;
+  text-decoration:none;
+  font-size:20px;
+  border-radius:40px;
+  transition:0.4s;
+  font-family:'Poppins', sans-serif;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+.login-btn:hover{
+  background:white;
+  color:#0f3d3e;
+  transform:translateY(-3px);
+}
+
+/* FEATURES SECTION */
+
+.features-section{
+  background:#f4f4f4;
+  padding:90px 40px;
+}
+
+.features-title{
+  text-align:center;
+  font-size:42px;
+  color:#0f3d3e;
+  margin-bottom:60px;
+}
+
+/* FEATURES */
+
+.features{
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  flex-wrap:nowrap;
+}
+
+/* FEATURE CARDS */
+
+.feature-card{
+  background:white;
+  width:24%;
+  padding:40px 25px;
+  border-radius:25px;
+  text-align:center;
+  transition:0.4s;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.feature-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+.feature-card h3{
+  color:#0f2c21;
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.feature-card p{
+  color:#333;
+  font-size:20px;
+  line-height:1.7;
+}
+
+/* ANIMATION */
+
+@keyframes slideUp{
+
+  from{
+    opacity:0;
+    transform:translateY(80px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .features{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .feature-card{
+    width:45%;
+    margin-bottom:20px;
+  }
+
+}
+
+@media(max-width:900px){
+
+  nav{
+    flex-direction:column;
+    gap:15px;
+    padding:20px;
+  }
+
+  .hero-content{
+    margin:0 30px;
+    text-align:center;
+  }
+
+  .hero-content h1{
+    font-size:45px;
+  }
+
+  .hero-content p{
+    font-size:18px;
+  }
+
+  .features-section{
+    padding:70px 25px;
+  }
+
+  .features-title{
+    font-size:34px;
+  }
+
+  .feature-card{
+    width:100%;
+  }
+
+  .logo-text h2{
+    font-size:26px;
+  }
+
+  .logo-image img{
+    width:65px;
+    height:65px;
+  }
+
+  .login-btn{
+    font-size:18px;
+    padding:13px 30px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+
+  <!-- LOGO -->
+  <div class="logo">
+
+    <div class="logo-image">
+
+      <!-- SAVE YOUR IMAGE AS elder-logo.png -->
+      <img src="logo.png" alt="Vatsalya Care Logo">
+
+    </div>
+
+    <div class="logo-text">
+
+      <h2>VATSALYA CARE</h2>
+
+      <span>SENIOR HEALTH SUPPORT</span>
+
+    </div>
+
+  </div>
+
+  <!-- NAVIGATION -->
+  <ul>
+
+    
+
+    <li>
+      <a href="about.html">About</a>
+    </li>
+
+    <li>
+      <a href="contact.html">Contact</a>
+    </li>
+
+  </ul>
+
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>Senior Care Services</h1>
+
+    <p>
+      Professional and trusted healthcare assistance for elderly care at home.
+      Book verified caregivers, nurses, physiotherapists, and recovery experts easily.
+    </p>
+
+    <!-- LOGIN BUTTON -->
+    <a href="login.html" class="login-btn">
+      Login
+    </a>
+
+  </div>
+
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features-section" id="features">
+
+  <h2 class="features-title">
+    Our Healthcare Features
+  </h2>
+
+  <div class="features">
+
+    <div class="feature-card">
+
+      <h3>✔ Nursing Care</h3>
+
+      <p>
+        Professional nurses providing personalized medical support and care at home.
+      </p>
+
+    </div>
+
+    <div class="feature-card">
+
+      <h3>✔ Elderly Support</h3>
+
+      <p>
+        Daily assistance and emotional companionship for senior citizens.
+      </p>
+
+    </div>
+
+    <div class="feature-card">
+
+      <h3>✔ Physiotherapy</h3>
+
+      <p>
+        Expert physiotherapy sessions for mobility and recovery improvement.
+      </p>
+
+    </div>
+
+    <div class="feature-card">
+
+      <h3>✔ Home Visits</h3>
+
+      <p>
+        Healthcare professionals available for regular home consultations and checkups.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</body>
+</html>

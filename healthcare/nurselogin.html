@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nurse Portal - Vatsalya Care</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:linear-gradient(135deg,#dff6f0,#f0f7ff);
+  font-family:'Times New Roman', serif;
+  min-height:100vh;
+  padding:30px;
+}
+
+.container{
+  max-width:900px;
+  max-height:600;
+  margin:auto;
+}
+
+/* TOP RIGHT BACK BUTTON */
+
+.top-back{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:1000;
+}
+
+.top-back a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  text-decoration:none;
+  color:#020202;
+  font-size:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  transition:0.3s;
+}
+
+.top-back a:hover{
+  transform:scale(1.08);
+  background:white;
+}
+
+/* BOXES */
+
+.login-box,
+.profile-section,
+.inventory-section{
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:35px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* TITLES */
+
+h1,h2,h3{
+  font-family:'Playfair Display', serif;
+  color:#0e2d28;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title p{
+  color:#555;
+  margin-top:8px;
+}
+
+/* INPUTS */
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:15px;
+  font-family:'Times New Roman', serif;
+  outline:none;
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+/* BUTTONS */
+
+button{
+  background:linear-gradient(135deg,#2b7a78,#3aafa9);
+  color:white;
+  border:none;
+  padding:14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+  margin-top:15px;
+  transition:0.3s;
+  font-family:'Playfair Display', serif;
+}
+
+button:hover{
+  transform:scale(1.03);
+}
+
+.logout-btn{
+  background:linear-gradient(135deg,#c0392b,#e74c3c);
+}
+
+.inventory-btn{
+  background:linear-gradient(135deg,#34495e,#5d6d7e);
+}
+
+/* STATUS */
+
+#loginMsg,
+#saveMsg{
+  margin-top:15px;
+  font-weight:bold;
+}
+
+/* SECTIONS */
+
+.profile-section,
+.inventory-section{
+  display:none;
+}
+
+/* CARD */
+
+.info-card{
+  background:white;
+  padding:18px;
+  border-radius:15px;
+  margin-top:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* AVAILABILITY */
+
+.available{
+  color:green;
+  font-weight:bold;
+}
+
+.not-available{
+  color:red;
+  font-weight:bold;
+}
+
+/* TABLE */
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th, td{
+  padding:14px;
+  border-bottom:1px solid #ccc;
+  text-align:left;
+}
+
+th{
+  background:#2b7a78;
+  color:white;
+  font-family:'Playfair Display', serif;
+}
+
+tr:hover{
+  background:#f4fdfc;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP RIGHT BACK BUTTON -->
+
+<div class="top-back">
+<a href="nurselogin.html">
+⬅
+</a>
+</div>
+
+<div class="container">
+
+<!-- LOGIN SECTION -->
+
+<div class="login-box" id="loginBox">
+
+<div class="title">
+<h1>🩺 Nurse Login</h1>
+<p>Vatsalya Care Healthcare Platform</p>
+</div>
+
+<input type="text" id="nurseId" placeholder="Enter Nurse ID">
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<button onclick="loginNurse()">Login</button>
+
+<p id="loginMsg"></p>
+
+</div>
+
+<!-- PROFILE SECTION -->
+
+<div class="profile-section" id="profileSection">
+
+<div class="title">
+<h1>Nurse Registration</h1>
+<p>Fill your professional credentials and caregiver details</p>
+</div>
+
+<div class="grid">
+
+<div>
+<label>Full Name</label>
+<input type="text" id="fullName" placeholder="Enter Full Name">
+</div>
+
+<div>
+<label>Age</label>
+<input type="number" id="age" placeholder="Enter Age">
+</div>
+
+<div>
+<label>Gender</label>
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Phone Number</label>
+<input type="tel" id="phone" placeholder="Enter Phone Number">
+</div>
+
+<div>
+<label>Email Address</label>
+<input type="email" id="email" placeholder="Enter Email">
+</div>
+
+<div>
+<label>Address</label>
+<input type="text" id="address" placeholder="Enter Address">
+</div>
+
+<div>
+<label>Highest Qualification</label>
+<select id="qualification">
+<option value="">Select Qualification</option>
+<option>GNM Nursing</option>
+<option>B.Sc Nursing</option>
+<option>M.Sc Nursing</option>
+<option>Diploma Nursing</option>
+<option>Other</option>
+</select>
+</div>
+
+<div>
+<label>Years of Experience</label>
+<input type="number" id="experience" placeholder="Experience in Years">
+</div>
+
+<div>
+<label>Specialization</label>
+<select id="specialization">
+<option value="">Select Specialization</option>
+<option>ICU Care</option>
+<option>Elderly Care</option>
+<option>Post Surgery Care</option>
+<option>Physiotherapy Support</option>
+<option>General Nursing</option>
+<option>Emergency Care</option>
+</select>
+</div>
+
+<div>
+<label>Nurse ID</label>
+<input type="text" id="nurseIdProfile" placeholder="Enter Nurse Id">
+</div>
+
+<div>
+<label>ID Proof (Aadhaar / PAN Card)</label>
+<input type="file" id="idProof" accept=".pdf,.jpg,.jpeg,.png">
+</div>
+
+<div>
+<label>Availability Status</label>
+<select id="availability">
+<option value="">Select Status</option>
+<option>Available as Caregiver</option>
+<option>Not Available</option>
+</select>
+</div>
+
+<div>
+<label>Preferred Shift</label>
+<select id="shift">
+<option value="">Select Shift</option>
+<option>Morning</option>
+<option>Afternoon</option>
+<option>Night</option>
+<option>Flexible</option>
+</select>
+</div>
+
+<div>
+<label>Required Caretaker For?</label>
+<select id="caretakerFor">
+<option value="">Select Service</option>
+<option>Nursing Care</option>
+<option>Elderly Attendant</option>
+<option>Physiotherapy</option>
+<option>Post Hospital Care</option>
+<option>All In One</option>
+</select>
+</div>
+
+</div>
+
+<label style="margin-top:15px; display:block;">
+Additional Notes
+</label>
+
+<textarea id="notes" rows="5" placeholder="Enter additional information"></textarea>
+
+<button onclick="saveProfile()">
+Save Nurse Profile
+</button>
+
+<button class="inventory-btn" onclick="showInventory()">
+View Nurse Inventory
+</button>
+
+<button class="logout-btn" onclick="logoutNurse()">
+Logout
+</button>
+
+<p id="saveMsg"></p>
+
+<!-- SAVED PROFILE DISPLAY -->
+
+<div class="info-card" id="profileCard" style="display:none;">
+
+<h3>Saved Nurse Information</h3>
+
+<p><b>Name:</b> <span id="displayName"></span></p>
+
+<p><b>Qualification:</b> <span id="displayQualification"></span></p>
+
+<p><b>Experience:</b> <span id="displayExperience"></span></p>
+
+<p><b>Specialization:</b> <span id="displaySpecialization"></span></p>
+
+<p><b>Availability:</b> <span id="displayAvailability"></span></p>
+
+<p><b>Required Caretaker For:</b> <span id="displayCaretaker"></span></p>
+
+</div>
+
+</div>
+
+<!-- INVENTORY SECTION -->
+
+<div class="inventory-section" id="inventorySection">
+
+<div class="title">
+<h1>📋 Nurse Inventory</h1>
+<p>List of Registered Nurses and Caregivers</p>
+</div>
+
+<div class="info-card">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Qualification</th>
+<th>Experience</th>
+<th>Specialization</th>
+<th>Availability</th>
+<th>Caretaker For</th>
+</tr>
+
+</thead>
+
+<tbody id="nurseTable">
+
+<tr>
+<td colspan="6" style="text-align:center;">
+No Nurse Profiles Added Yet
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* LOAD SAVED DATA */
+
+/* LOAD SAVED DATA */
+
+let nurses =
+JSON.parse(localStorage.getItem("nurses")) || [];
+/* LOGIN FUNCTION */
+
+function loginNurse(){
+
+  let nurseId = document.getElementById("nurseId").value;
+  let password = document.getElementById("password").value;
+
+  let msg = document.getElementById("loginMsg");
+
+  if(nurseId === "" || password === ""){
+
+    msg.style.color = "red";
+    msg.innerText = "Please fill all credentials";
+    return;
+  }
+
+  if(nurseId === "nurse101" && password === "care123"){
+
+    msg.style.color = "green";
+    msg.innerText = "Login Successful";
+
+    setTimeout(()=>{
+
+      document.getElementById("loginBox").style.display = "none";
+
+      document.getElementById("profileSection").style.display = "block";
+
+    },1000);
+  }
+
+  else{
+
+    msg.style.color = "red";
+    msg.innerText = "Invalid Nurse ID or Password";
+  }
+}
+
+/* SAVE PROFILE */
+
+function saveProfile(){
+
+    const nurseData = {
+
+        nurseId: document.getElementById("nurseIdProfile").value.trim(),
+        name: document.getElementById("fullName").value.trim(),
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        qualification: document.getElementById("qualification").value,
+        experience: document.getElementById("experience").value,
+        specialization: document.getElementById("specialization").value,
+        availability: document.getElementById("availability").value,
+        shift: document.getElementById("shift").value,
+        caretakerFor: document.getElementById("caretakerFor").value,
+        notes: document.getElementById("notes").value,
+        idProof: document.getElementById("idProof").files.length > 0
+                 ? document.getElementById("idProof").files[0].name
+                 : ""
+
+    };
+
+    if(
+        nurseData.nurseId === "" ||
+        nurseData.name === "" ||
+        nurseData.qualification === "" ||
+        nurseData.experience === "" ||
+        nurseData.specialization === "" ||
+        nurseData.availability === "" ||
+        nurseData.caretakerFor === ""
+    ){
+        document.getElementById("saveMsg").style.color = "red";
+        document.getElementById("saveMsg").innerText =
+        "Please fill all required fields";
+        return;
+    }
+
+    /* Prevent Duplicate Nurse IDs */
+
+    let existingNurse = nurses.find(
+        nurse => nurse.nurseId === nurseData.nurseId
+    );
+
+    if(existingNurse){
+
+        document.getElementById("saveMsg").style.color = "red";
+        document.getElementById("saveMsg").innerText =
+        "Nurse ID already exists";
+
+        return;
+    }
+
+    nurses.push(nurseData);
+
+    localStorage.setItem(
+        "nurses",
+        JSON.stringify(nurses)
+    );
+
+    updateInventory();
+
+    document.getElementById("saveMsg").style.color = "green";
+    document.getElementById("saveMsg").innerText =
+    "Nurse Profile Saved Successfully";
+
+    document.getElementById("profileCard").style.display = "block";
+
+    document.getElementById("displayName").innerText =
+    nurseData.name;
+
+    document.getElementById("displayQualification").innerText =
+    nurseData.qualification;
+
+    document.getElementById("displayExperience").innerText =
+    nurseData.experience + " Years";
+
+    document.getElementById("displaySpecialization").innerText =
+    nurseData.specialization;
+
+    document.getElementById("displayCaretaker").innerText =
+    nurseData.caretakerFor;
+
+    document.getElementById("displayAvailability").innerText =
+    nurseData.availability;
+
+    clearForm();
+}
+
+/* UPDATE INVENTORY */
+
+function updateInventory(){
+
+    const table =
+    document.getElementById("nurseTable");
+
+    const nurses =
+    JSON.parse(localStorage.getItem("nurses")) || [];
+
+    table.innerHTML = "";
+
+    if(nurses.length === 0){
+
+        table.innerHTML = `
+        <tr>
+            <td colspan="6" style="text-align:center;">
+                No Nurse Profiles Added Yet
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+    nurses.forEach(nurse => {
+
+        table.innerHTML += `
+        <tr>
+            <td>${nurse.name}</td>
+            <td>${nurse.qualification}</td>
+            <td>${nurse.experience} Years</td>
+            <td>${nurse.specialization}</td>
+            <td>${nurse.availability}</td>
+            <td>${nurse.caretakerFor}</td>
+        </tr>
+        `;
+    });
+}
+
+/* SHOW INVENTORY */
+
+function showInventory(){
+
+    updateInventory();
+
+    document.getElementById("profileSection").style.display = "none";
+
+    document.getElementById("inventorySection").style.display = "block";
+}
+/* clear */
+function clearForm(){
+
+    document.getElementById("fullName").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("gender").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("qualification").value = "";
+    document.getElementById("experience").value = "";
+    document.getElementById("specialization").value = "";
+    document.getElementById("nurseIdProfile").value = "";
+    document.getElementById("availability").value = "";
+    document.getElementById("shift").value = "";
+    document.getElementById("caretakerFor").value = "";
+    document.getElementById("notes").value = "";
+    document.getElementById("idProof").value = "";
+}
+
+/* BACK TO PROFILE */
+
+function backToProfile(){
+
+  document.getElementById("inventorySection").style.display = "none";
+
+  document.getElementById("profileSection").style.display = "block";
+}
+
+/* LOGOUT */
+
+function logoutNurse(){
+
+  document.getElementById("profileSection").style.display = "none";
+
+  document.getElementById("inventorySection").style.display = "none";
+
+  document.getElementById("loginBox").style.display = "block";
+
+  document.getElementById("nurseId").value = "";
+  document.getElementById("password").value = "";
+
+  document.getElementById("loginMsg").innerText = "";
+}
+
+/* LOAD INVENTORY ON PAGE LOAD */
+
+window.onload = function(){
+
+    updateInventory();
+
+};
+
+</script>
+
+</body>
+</html>

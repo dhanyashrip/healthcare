@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SheShield - Women Safety Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Times New Roman", Times, serif;
+}
+
+body{
+background:#f7f7fb;
+color:#222;
+}
+
+.container{
+width:95%;
+margin:auto;
+}
+
+/* NAVBAR */
+
+.navbar{
+height:80px;
+background:#fff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 25px;
+box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+width:55px;
+height:55px;
+object-fit:contain;
+}
+
+.logo-text h2{
+color:#ff2f7f;
+font-size:28px;
+}
+
+.logo-text span{
+font-size:12px;
+color:#777;
+}
+
+.nav-links{
+display:flex;
+gap:35px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#222;
+font-weight:500;
+}
+
+.nav-links a.active{
+color:#ff2f7f;
+border-bottom:3px solid #ff2f7f;
+padding-bottom:20px;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.profile img{
+width:42px;
+height:42px;
+border-radius:50%;
+}
+
+/* HERO */
+
+.hero{
+margin-top:15px;
+display:grid;
+grid-template-columns:2fr 1fr;
+border-radius:25px;
+overflow:hidden;
+background:white;
+}
+
+.hero-left{
+height:320px;
+background:
+linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.75)),
+url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1200');
+background-size:cover;
+background-position:center;
+padding:55px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.hero-left h1{
+font-size:58px;
+line-height:1.1;
+color:#18203a;
+}
+
+.hero-left h1 span{
+color:#ff2f7f;
+}
+
+.hero-left p{
+margin-top:15px;
+font-size:24px;
+color:#555;
+}
+
+.hero-buttons{
+margin-top:25px;
+display:flex;
+gap:15px;
+}
+
+.btn{
+padding:14px 30px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+}
+
+.sos-btn{
+background:#ff2f7f;
+color:white;
+}
+
+.location-btn{
+background:white;
+color:#ff2f7f;
+}
+
+.hero-right{
+background:linear-gradient(135deg,#6a1bb8,#4c2bb5);
+color:white;
+padding:35px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.hero-right h2{
+margin-bottom:20px;
+}
+
+.hero-right ul{
+list-style:none;
+}
+
+.hero-right li{
+margin:20px 0;
+font-size:18px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+margin-top:18px;
+display:grid;
+grid-template-columns:1.2fr 0.8fr 1.1fr 1fr;
+gap:15px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+padding:22px;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.card-title{
+font-size:26px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+/* QUICK ACCESS */
+
+.quick-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.quick-box{
+height:120px;
+border-radius:15px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-weight:600;
+}
+
+.box1{background:#fde8ef;}
+.box2{background:#efe7ff;}
+.box3{background:#e7f2ff;}
+.box4{background:#e7fff5;}
+
+/* SOS CARD */
+
+.sos-container{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.sos-circle{
+width:180px;
+height:180px;
+background:#ff2f7f;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:50px;
+font-weight:bold;
+box-shadow:0 0 0 20px rgba(255,47,127,.15);
+cursor:pointer;
+transition:.3s;
+}
+
+.sos-circle:hover{
+transform:scale(1.05);
+}
+
+.sos-text{
+margin-top:25px;
+text-align:center;
+color:#ff2f7f;
+font-weight:600;
+}
+
+/* MAP */
+
+.map{
+height:200px;
+border-radius:15px;
+overflow:hidden;
+}
+
+.map img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.location-info{
+margin-top:15px;
+color:#444;
+}
+
+/* CONTACTS */
+
+.contact{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+
+.contact-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.contact img{
+width:45px;
+height:45px;
+border-radius:50%;
+}
+
+.call-btn{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#ffe6ef;
+display:flex;
+justify-content:center;
+align-items:center;
+color:#ff2f7f;
+cursor:pointer;
+}
+
+/* STATS */
+
+.bottom-section{
+margin-top:18px;
+background:linear-gradient(135deg,#5d2dbd,#6e2fb5);
+color:white;
+border-radius:25px;
+padding:30px;
+display:grid;
+grid-template-columns:1.5fr 2fr 1fr;
+align-items:center;
+gap:20px;
+}
+
+.left-info h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.find-btn{
+margin-top:15px;
+padding:12px 25px;
+border:none;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+}
+
+.stats{
+display:flex;
+justify-content:space-around;
+text-align:center;
+}
+
+.stats h3{
+font-size:35px;
+}
+
+.tip{
+background:linear-gradient(135deg,#ff7bb4,#ff96a3);
+padding:25px;
+border-radius:18px;
+}
+
+.tip h3{
+margin-bottom:15px;
+}
+
+/* FOOTER */
+
+footer{
+margin-top:20px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:#666;
+}
+
+.socials{
+display:flex;
+gap:15px;
+font-size:22px;
+}
+
+@media(max-width:1200px){
+
+.dashboard{
+grid-template-columns:1fr;
+}
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.bottom-section{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.stats{
+flex-wrap:wrap;
+gap:20px;
+}
+.profile-header{
+background:white;
+padding:25px;
+border-radius:20px;
+display:flex;
+align-items:center;
+gap:25px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.profile-image-section{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
+}
+
+.profile-img{
+width:120px;
+height:120px;
+border-radius:50%;
+border:5px solid #ff2f7f;
+object-fit:cover;
+}
+
+.badge{
+display:inline-block;
+background:#fff4f8;
+color:#ff2f7f;
+padding:6px 15px;
+border-radius:20px;
+font-weight:600;
+}
+
+.profile-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.info-row label{
+display:block;
+margin-bottom:6px;
+font-weight:600;
+}
+
+.info-row input{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.edit-btn{
+background:#ff2f7f;
+color:white;
+}
+
+.save-btn{
+background:#6a1bb8;
+color:white;
+display:none;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div id="homePage">
+   <div class="navbar">
+
+<div class="logo">
+    <img src="logo.png" alt="SheShield Logo">
+    <div class="logo-text">
+        <h2>SheShield</h2>
+        <span>Women Safety Platform</span>
+    </div>
+
+</div>
+
+<div class="nav-links">
+<a href="#" id="homeLink" class="active" onclick="showHome()">Home</a>
+<a href="#" id="profileLink" onclick="showProfile()">Profile</a>
+<a href="#">SOS</a>
+<a href="#">Safe Zones</a>
+<a href="#">Volunteers</a>
+<a href="#">Resources</a>
+<a href="#">Contact</a>
+</div>
+
+<div class="profile">
+🔔
+
+<span> </span>
+</div>
+
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="hero-left">
+
+<h1>Your Safety,<br><span>Our Priority</span></h1>
+
+<p>
+Instant help. Real-time tracking.<br>
+Stronger together.
+</p>
+
+<div class="hero-buttons">
+<button class="btn sos-btn">📞 Emergency SOS</button>
+<button class="btn location-btn">📍 Share Location</button>
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<h2>Stay Protected</h2>
+
+<ul>
+<li>🛡 One Tap SOS Alert</li>
+<li>📍 Real-Time Location Sharing</li>
+<li>👩‍💼 Nearby Volunteer Support</li>
+<li>✅ Trusted & Verified Network</li>
+</ul>
+
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard">
+
+<div class="card">
+
+<div class="card-title">Quick Access</div>
+
+<div class="quick-grid">
+
+<div class="quick-box box1">
+📞
+Emergency SOS
+</div>
+
+<div class="quick-box box2">
+📍
+Share Location
+</div>
+
+<div class="quick-box box3">
+👥
+Emergency Contacts
+</div>
+
+<div class="quick-box box4">
+🛡
+Safety Tips
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Emergency Alert</div>
+
+<div class="sos-container">
+
+<div class="sos-circle" onclick="sendSOS()">
+SOS
+</div>
+
+<div class="sos-text">
+Press and Hold for 3 Seconds
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Current Location</div>
+
+<div class="map">
+<img src="https://maps.gstatic.com/tactile/basepage/pegman_sherlock.png">
+</div>
+
+<div class="location-info">
+📍 Connaught Place, New Delhi<br><br>
+🎯 Accuracy: 10 meters
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Emergency Contacts</div>
+
+<div class="contact">
+<div class="contact-left">
+<img src="https://randomuser.me/api/portraits/women/65.jpg">
+<div>
+<b>Neha Sharma</b><br>
+Sister
+</div>
+</div>
+<div class="call-btn">📞</div>
+</div>
+
+<div class="contact">
+<div class="contact-left">
+<img src="https://randomuser.me/api/portraits/men/55.jpg">
+<div>
+<b>Rajesh Sharma</b><br>
+Father
+</div>
+</div>
+<div class="call-btn">📞</div>
+</div>
+
+<div class="contact">
+<div class="contact-left">
+<img src="https://randomuser.me/api/portraits/women/35.jpg">
+<div>
+<b>Pooja Verma</b><br>
+Friend
+</div>
+</div>
+<div class="call-btn">📞</div>
+</div>
+
+<div class="contact">
+<div class="contact-left">
+<img src="https://randomuser.me/api/portraits/women/12.jpg">
+<div>
+<b>Riya Kapoor</b><br>
+Colleague
+</div>
+</div>
+<div class="call-btn">📞</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTTOM SECTION -->
+
+<div class="bottom-section">
+
+<div class="left-info">
+
+<h2>You Are Not Alone</h2>
+
+<p>
+Our verified volunteers are always ready to help you.
+</p>
+
+<button class="find-btn">Find Volunteers</button>
+
+</div>
+
+<div class="stats">
+
+<div>
+<h3>2500+</h3>
+<p>Verified Volunteers</p>
+</div>
+
+<div>
+<h3>1200+</h3>
+<p>Lives Protected</p>
+</div>
+
+<div>
+<h3>50+</h3>
+<p>Cities Covered</p>
+</div>
+
+<div>
+<h3>24/7</h3>
+<p>Support Available</p>
+</div>
+
+</div>
+
+<div class="tip">
+
+<h3>Safety Tip of the Day</h3>
+
+<p>
+Always share your live location with trusted contacts while travelling alone.
+</p>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div>
+© 2024 SheShield. All rights reserved.
+</div>
+
+<div class="socials">
+📘 📸 🐦 ▶
+</div>
+
+</footer>
+
+</div>
+
+<script>
+
+function sendSOS(){
+alert("🚨 Emergency SOS Activated!");
+}
+
+</script>
+
+</body>
+</html>
+</div>
+
+<div id="profilePage" style="display:none;">
+   <div class="container">
+
+<!-- PROFILE HEADER -->
+
+<div class="profile-header">
+
+<div class="profile-image-section">
+
+<img
+id="profilePreview"
+class="profile-img"
+src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+alt="Profile">
+
+<input
+type="file"
+id="profileUpload"
+accept="image/*"
+onchange="previewImage(event)">
+
+</div>
+
+<div class="profile-info">
+
+<h1 id="displayName">User Profile</h1>
+
+<p>
+Complete your profile information
+</p>
+
+<div class="badge">
+Profile Setup
+</div>
+
+</div>
+
+</div>
+
+<!-- PROFILE DETAILS -->
+
+<div class="card">
+
+<h2>Profile Information</h2>
+
+<div class="profile-grid">
+
+<div class="info-row">
+<label>Full Name</label>
+<input type="text"
+id="name"
+placeholder="Enter Full Name"
+disabled>
+</div>
+
+<div class="info-row">
+<label>Email</label>
+<input type="email"
+id="email"
+placeholder="Enter Email"
+disabled>
+</div>
+
+<div class="info-row">
+<label>Phone Number</label>
+<input type="text"
+id="phone"
+placeholder="Enter Phone Number"
+disabled>
+</div>
+
+<div class="info-row">
+<label>Date of Birth</label>
+<input type="date"
+id="dob"
+disabled>
+</div>
+
+<div class="info-row">
+<label>Address</label>
+<input type="text"
+id="address"
+placeholder="Enter Address"
+disabled>
+</div>
+
+<div class="info-row">
+<label>Blood Group</label>
+<input type="text"
+id="blood"
+placeholder="Enter Blood Group"
+disabled>
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+class="btn edit-btn"
+onclick="editProfile()">
+Edit Profile
+</button>
+
+<button
+class="btn save-btn"
+id="saveBtn"
+onclick="saveProfile()">
+Save Changes
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+const image =
+document.getElementById("profilePreview");
+
+image.src =
+URL.createObjectURL(event.target.files[0]);
+
+}
+
+function editProfile(){
+
+let inputs =
+document.querySelectorAll(
+"input[type='text'],input[type='email'],input[type='date']"
+);
+
+inputs.forEach(input=>{
+input.disabled=false;
+});
+
+document.getElementById("saveBtn").style.display="inline-block";
+
+}
+
+function saveProfile(){
+
+let name =
+document.getElementById("name").value;
+
+if(name.trim() !== ""){
+document.getElementById("displayName").innerText=name;
+}
+
+let inputs =
+document.querySelectorAll(
+"input[type='text'],input[type='email'],input[type='date']"
+);
+
+inputs.forEach(input=>{
+input.disabled=true;
+});
+
+document.getElementById("saveBtn").style.display="none";
+
+alert("Profile Updated Successfully!");
+
+}
+
+</script>
+
+
+
+</div>
+<script>
+
+function showProfile(){
+document.getElementById("homePage").style.display="none";
+document.getElementById("profilePage").style.display="block";
+
+document.getElementById("homeLink").classList.remove("active");
+document.getElementById("profileLink").classList.add("active");
+}
+
+function showHome(){
+document.getElementById("profilePage").style.display="none";
+document.getElementById("homePage").style.display="block";
+
+document.getElementById("profileLink").classList.remove("active");
+document.getElementById("homeLink").classList.add("active");
+}
+
+function previewImage(event){
+document.getElementById("profilePreview").src =
+URL.createObjectURL(event.target.files[0]);
+}
+
+function editProfile(){
+document.querySelectorAll(
+"#profilePage input[type='text'], #profilePage input[type='email'], #profilePage input[type='date']"
+).forEach(input => input.disabled = false);
+
+document.getElementById("saveBtn").style.display = "inline-block";
+}
+
+function saveProfile(){
+
+let name=document.getElementById("name").value;
+
+if(name.trim()!=""){
+document.getElementById("displayName").innerText=name;
+}
+
+document.querySelectorAll(
+"#profilePage input[type='text'], #profilePage input[type='email'], #profilePage input[type='date']"
+).forEach(input => input.disabled = true);
+
+document.getElementById("saveBtn").style.display="none";
+
+alert("Profile Updated Successfully!");
+}
+
+</script>
+</body>
+</html>
+

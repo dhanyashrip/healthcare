@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ElderCare Platform</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Times New Roman', Times, serif;
+  background: linear-gradient(135deg,#dff6f0,#f0f7ff);
+  min-height:100vh;
+  display:flex;
+}
+
+/* SIDEBAR */
+nav{
+  width:220px;
+  background:#27544bd8;
+  display:flex;
+  flex-direction:column;
+  padding-top:20px;
+  min-height:100vh;
+  position:relative;
+}
+
+nav button{
+  font-family:'Playfair Display', serif;
+  background:none;
+  border:none;
+  color:rgba(6, 6, 6, 0.977);
+  padding:15px;
+  text-align:left;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+nav button:hover{
+  background:#3aafa963;
+}
+
+/* TOP RIGHT BACK BUTTON */
+.top-back-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:50px;
+  height:50px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(6, 61, 52, 0.009);
+  backdrop-filter:blur(10px);
+
+  border-radius:50%;
+  text-decoration:none;
+
+  font-size:26px;
+  color:#070707;
+
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+
+  transition:0.3s;
+  z-index:1000;
+}
+
+.top-back-btn:hover{
+  transform:scale(1.1);
+  background:rgba(255,255,255,0.4);
+}
+
+/* MAIN CONTENT */
+.main{
+  flex:1;
+}
+
+/* HEADER */
+header{
+  background: linear-gradient(135deg,#266c6977,#3584808f);
+  color:white;
+  text-align:center;
+  padding:25px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* HEADER LOGO */
+.logo-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.logo-container img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+}
+
+header h1{
+  font-size:32px;
+}
+
+/* SECTIONS */
+.section{
+  display:none;
+  padding:30px;
+}
+
+.active{
+  display:block;
+}
+
+/* CARD */
+.card{
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom:20px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+/* BUTTON */
+button{
+  background: linear-gradient(135deg,#2b7a78,#3aafa9);
+  color:rgba(12, 12, 12, 0.995);
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-family:'Playfair Display', serif;
+  font-size:15px;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* INPUT */
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-family:'Times New Roman', serif;
+  font-size:15px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px 20px;
+}
+
+.hero h2{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  margin-bottom:20px;
+  color:#444;
+  font-size:17px;
+}
+
+/* LIST */
+ul{
+  padding-left:20px;
+  line-height:1.8;
+}
+
+/* HEADINGS */
+h1,h2,h3,h4{
+  font-family:'Playfair Display', serif;
+  letter-spacing:0.5px;
+}
+
+/* PROFILE TITLE */
+.profile-title{
+  margin-top:25px;
+  margin-bottom:10px;
+  color:#0d1313;
+}
+
+/* TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td{
+  padding:12px;
+  border-bottom:1px solid #ccc;
+}
+
+th{
+  background:#2b7a78;
+  color:white;
+}
+
+/* BOOKING MESSAGE */
+#bookingStatus{
+  margin-top:15px;
+  font-size:18px;
+  color:#14585b;
+  font-weight:bold;
+  line-height:1.8;
+}
+
+/* PREFERRED SERVICES CHECKBOXES */
+
+.service-options{
+  margin:10px 0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.service-options label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.service-options input[type="checkbox"]{
+  width:18px;
+  height:18px;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- TOP RIGHT BACK BUTTON -->
+<a href="login.html" class="top-back-btn">
+⬅
+</a>
+
+<!-- SIDEBAR NAV -->
+<nav>
+
+<button onclick="showSection('home')">Home</button>
+<button onclick="showSection('login')">Login</button>
+<button onclick="showSection('services')">Services</button>
+<button onclick="showSection('booking')">Booking</button>
+<button onclick="showSection('feedback')">Feedback</button>
+<button onclick="showSection('inventory')">Inventory</button>
+
+<!-- ADMIN BUTTON -->
+
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<header>
+
+<div class="logo-container">
+
+<img src="logo.png" alt="Vatsalya Care Logo">
+
+<div>
+<h1>VATSALYA CARE</h1>
+<p>Safe • Trusted • Home Healthcare Services</p>
+</div>
+
+</div>
+
+</header>
+
+<!-- HOME -->
+<div id="home" class="section active">
+
+<div class="hero">
+<h2>Compassionate Care for Your Loved Ones</h2>
+<p>Book trusted caregivers, nurses, and healthcare professionals at home.</p>
+</div>
+
+<div class="card">
+<h2>About Our Platform</h2>
+<p>
+We connect families with verified healthcare professionals to provide safe, reliable, and personalized elderly care at home.
+Our platform ensures dignity, comfort, and continuous support for senior citizens.
+</p>
+</div>
+
+<div class="card">
+<h2>How It Works</h2>
+<ul>
+<li>1. Register and create profile</li>
+<li>2. Choose service</li>
+<li>3. Select caregiver</li>
+<li>4. Book and confirm</li>
+<li>5. Receive care at home</li>
+</ul>
+</div>
+
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="section">
+
+<div class="card">
+
+<h2>User Login</h2>
+
+<input type="text" id="username" placeholder="Enter Username">
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<button onclick="login()">Login</button>
+
+<h2 class="profile-title">Create Patient Profile</h2>
+
+<input type="text" id="patientName" placeholder="Patient Full Name">
+
+<input type="number" id="age" placeholder="Age">
+
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<select id="bloodGroup">
+    <option value="">Select Blood Group</option>
+    <option>A+</option>
+    <option>A-</option>
+    <option>B+</option>
+    <option>B-</option>
+    <option>AB+</option>
+    <option>AB-</option>
+    <option>O+</option>
+    <option>O-</option>
+</select>
+
+<input type="tel" id="phone" placeholder="Patient Phone Number">
+
+<input type="tel" id="altPhone" placeholder="Alternate Phone Number">
+
+<input type="email" id="email" placeholder="Email Address">
+
+<textarea id="address" rows="3" placeholder="Residential Address"></textarea>
+
+<input type="text" id="guardian" placeholder="Guardian / Family Member Name">
+
+<input type="tel" id="guardianPhone" placeholder="Guardian Phone Number">
+
+<select id="insurance">
+<option value="">Any Insurance Done?</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<select id="needs">
+<option value="">Select Medical Need / Health Issue</option>
+<option>Diabetes Care</option>
+<option>Blood Pressure Monitoring</option>
+<option>Post Surgery Care</option>
+<option>Physiotherapy Support</option>
+<option>Bedridden Patient Care</option>
+<option>Stroke Recovery Assistance</option>
+<option>Heart Patient Care</option>
+<option>Paralysis Support</option>
+<option>Dementia / Alzheimer Care</option>
+<option>Medication Assistance</option>
+<option>Daily Elderly Assistance</option>
+<option>Wound Dressing Care</option>
+<option>Mobility Assistance</option>
+<option>Respiratory Care</option>
+<option>General Health Monitoring</option>
+</select>
+
+<label><strong>Preferred Services</strong></label>
+
+<div id="preferedServices" class="service-options">
+
+<label>
+<input type="checkbox" name="service" value="Nursing Care">
+Nursing Care
+</label>
+
+<label>
+<input type="checkbox" name="service" value="Elderly Attendant">
+Elderly Attendant
+</label>
+
+<label>
+<input type="checkbox" name="service" value="Physiotherapy">
+Physiotherapy
+</label>
+
+<label>
+<input type="checkbox" name="service" value="Post-Hospital Care">
+Post-Hospital Care
+</label>
+
+<label>
+<input type="checkbox" name="service" value="All / Other">
+All / Other
+</label>
+
+</div>
+
+<input type="text" id="allergies" placeholder="Allergies (if any)">
+
+<button onclick="createProfile()">Save Profile</button>
+
+<p id="profileMsg"></p>
+
+</div>
+
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="section">
+
+<h2>Available Services</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🩺 Nursing Care</h3>
+<p>Professional nursing care at home</p>
+<button onclick="selectService('Nursing Care')">Select</button>
+</div>
+
+<div class="card">
+<h3>👴 Elderly Attendant</h3>
+<p>Daily support and companionship</p>
+<button onclick="selectService('Attendant')">Select</button>
+</div>
+
+<div class="card">
+<h3>💪 Physiotherapy</h3>
+<p>Mobility and rehabilitation support</p>
+<button onclick="selectService('Physiotherapy')">Select</button>
+</div>
+
+<div class="card">
+<h3>🏥 Post-Hospital Care</h3>
+<p>Recovery assistance after discharge</p>
+<button onclick="selectService('Post Care')">Select</button>
+</div>
+
+</div>
+
+<h2 style="margin-top:30px;">Caregivers</h2>
+
+<div id="caregivers" class="grid"></div>
+
+</div>
+
+<!-- BOOKING -->
+<div id="booking" class="section">
+
+<div class="card">
+
+<h2>Book Service</h2>
+
+<p id="selectedService"></p>
+
+<select id="duration">
+<option value="">Select Duration</option>
+<option>Hourly</option>
+<option>Daily</option>
+<option>Long Term</option>
+</select>
+
+<button onclick="bookService()">Confirm Booking</button>
+
+<p id="bookingStatus"></p>
+
+</div>
+
+</div>
+
+<!-- FEEDBACK -->
+<div id="feedback" class="section">
+
+<div class="card">
+
+<h2>Feedback Form</h2>
+
+<input type="text" id="feedbackName" placeholder="Enter Your Name">
+
+<textarea id="feedbackText" rows="5" placeholder="Write your feedback here"></textarea>
+
+<select id="rating">
+<option value="">Select Rating</option>
+<option>⭐ 1</option>
+<option>⭐ 2</option>
+<option>⭐ 3</option>
+<option>⭐ 4</option>
+<option>⭐ 5</option>
+</select>
+
+<button onclick="submitFeedback()">Submit Feedback</button>
+
+<p id="feedbackMsg"></p>
+
+</div>
+
+</div>
+
+<!-- INVENTORY -->
+<div id="inventory" class="section">
+
+<h2 style="margin-bottom:20px;">Patient Inventory</h2>
+
+<div class="card">
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>Phone</th>
+<th>Medical Need</th>
+<th>Preferred Services</th>
+</tr>
+</thead>
+
+<tbody id="inventoryTable">
+
+<tr>
+<td colspan="6" style="text-align:center;">
+No patient profiles added yet
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+let selectedService = "";
+let bookings = 0;
+
+let patients =
+JSON.parse(localStorage.getItem("patients")) || [];
+
+/* SERVICE COUNTS */
+
+const caregivers = [
+  {name:"Anita", role:"Nurse", rating:4.5},
+  {name:"Ravi", role:"Attendant", rating:4.2},
+  {name:"Meena", role:"Physiotherapist", rating:4.8}
+];
+
+/* SECTION SWITCH */
+
+function showSection(id){
+
+  document.querySelectorAll('.section').forEach(sec=>{
+    sec.classList.remove('active');
+  });
+
+  document.getElementById(id).classList.add('active');
+}
+
+/* LOGIN */
+
+function login(){
+
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  if(username==="" || password===""){
+    alert("Fill Credentials");
+    return;
+  }
+
+  alert("Login Successful");
+
+  document.getElementById("username").value="";
+  document.getElementById("password").value="";
+}
+
+/* PROFILE */
+function createProfile(){
+
+  let name =
+  document.getElementById("patientName").value;
+
+  let age =
+  document.getElementById("age").value;
+
+  let gender =
+  document.getElementById("gender").value;
+
+  let phone =
+  document.getElementById("phone").value;
+
+  let need =
+  document.getElementById("needs").value;
+
+  let bloodGroup =
+  document.getElementById("bloodGroup").value;
+
+  let selectedServices = Array.from(
+    document.querySelectorAll(
+      '#preferedServices input[type="checkbox"]:checked'
+    )
+  )
+  .map(cb => cb.value)
+  .join(", ");
+
+  if(name === "" ||
+     age === "" ||
+     gender === "" ||
+     phone === ""){
+
+    alert("Fill Credentials");
+    return;
+  }
+
+  let patientData = {
+
+    name:name,
+    age:age,
+    gender:gender,
+    phone:phone,
+    need:need,
+    bloodGroup:bloodGroup,
+    services:selectedServices
+
+  };
+
+  let patients =
+  JSON.parse(localStorage.getItem("patients")) || [];
+
+  patients.push(patientData);
+
+  localStorage.setItem(
+    "patients",
+    JSON.stringify(patients)
+  );
+
+  updateInventory();
+
+  document.getElementById("profileMsg").innerText =
+  "Profile Saved Successfully";
+
+  alert("Patient Added Successfully");
+
+  /* CLEAR FORM */
+
+  document.getElementById("patientName").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("gender").value = "";
+  document.getElementById("bloodGroup").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("altPhone").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("guardian").value = "";
+  document.getElementById("guardianPhone").value = "";
+  document.getElementById("insurance").value = "";
+  document.getElementById("needs").value = "";
+  document.getElementById("allergies").value = "";
+
+  document.querySelectorAll(
+    '#preferedServices input[type="checkbox"]'
+  ).forEach(cb => cb.checked = false);
+}
+    
+/* UPDATE INVENTORY */
+
+function updateInventory(){
+
+  let table =
+  document.getElementById("inventoryTable");
+
+  let patients =
+  JSON.parse(localStorage.getItem("patients")) || [];
+
+  table.innerHTML = "";
+
+  if(patients.length === 0){
+
+    table.innerHTML = `
+    <tr>
+      <td colspan="6" style="text-align:center;">
+      No patient profiles added yet
+      </td>
+    </tr>
+    `;
+
+    return;
+  }
+
+  patients.forEach(patient => {
+
+    table.innerHTML += `
+    <tr>
+      <td>${patient.name}</td>
+      <td>${patient.age}</td>
+      <td>${patient.gender}</td>
+      <td>${patient.phone}</td>
+      <td>${patient.need}</td>
+      <td>${patient.services}</td>
+    </tr>
+    `;
+  });
+}
+
+/* LOAD CAREGIVERS */
+
+function loadCaregivers(){
+
+  let container = document.getElementById("caregivers");
+
+  container.innerHTML="";
+
+  caregivers.forEach(c=>{
+
+    container.innerHTML += `
+    <div class="card">
+      <h3>${c.name}</h3>
+      <p>${c.role}</p>
+      <p>⭐ ${c.rating}</p>
+    </div>`;
+  });
+}
+
+loadCaregivers();
+
+/* SELECT SERVICE */
+
+function selectService(service){
+
+  selectedService = service;
+
+  document.getElementById("selectedService").innerText =
+    "Selected: " + service;
+
+  showSection('booking');
+}
+updateInventory();
+
+/* BOOK SERVICE */
+
+function bookService(){
+
+  if(selectedService === ""){
+    alert("Please select a service first!");
+    return;
+  }
+
+  let duration =
+  document.getElementById("duration").value;
+
+  if(duration === ""){
+    alert("Please select duration!");
+    return;
+  }
+
+  let assignedCaregiver = "";
+
+  if(selectedService === "Nursing Care"){
+    assignedCaregiver = "Anita (Nurse)";
+  }
+  else if(selectedService === "Attendant"){
+    assignedCaregiver = "Ravi (Attendant)";
+  }
+  else if(selectedService === "Physiotherapy"){
+    assignedCaregiver = "Meena (Physiotherapist)";
+  }
+  else if(selectedService === "Post Care"){
+    assignedCaregiver = "Anita (Recovery Nurse)";
+  }
+
+  let bookingData =
+  JSON.parse(localStorage.getItem("bookingData")) || [];
+
+  /* GET LAST SAVED PATIENT */
+
+  let patients =
+  JSON.parse(localStorage.getItem("patients")) || [];
+
+  let patientName =
+  patients.length > 0
+  ? patients[patients.length - 1].name
+  : "Patient";
+
+  bookingData.push({
+
+    patient: patientName,
+
+    service: selectedService,
+
+    duration: duration
+
+  });
+
+  localStorage.setItem(
+    "bookingData",
+    JSON.stringify(bookingData)
+  );
+
+  document.getElementById("bookingStatus").innerHTML =
+  `
+  ✅ Booking Confirmed! <br><br>
+  👨‍⚕️ Assigned Caregiver:
+  <b>${assignedCaregiver}</b><br><br>
+  📞 The caregiver will contact you shortly.
+  `;
+
+  setTimeout(() => {
+
+    document.getElementById("bookingStatus").innerHTML =
+    `
+    ✅ Caregiver Assigned Successfully <br><br>
+    👨‍⚕️ ${assignedCaregiver} is ready to assist you.
+    `;
+
+  },3000);
+
+  document.getElementById("duration").value = "";
+  document.getElementById("selectedService").innerText = "";
+
+  selectedService = "";
+}
+
+/* FEEDBACK */
+
+function submitFeedback(){
+
+  let name = document.getElementById("feedbackName").value;
+  let feedback = document.getElementById("feedbackText").value;
+  let rating = document.getElementById("rating").value;
+
+  if(name==="" || feedback==="" || rating===""){
+    alert("Fill Credentials");
+    return;
+  }
+
+  document.getElementById("feedbackMsg").innerText =
+    "Feedback Submitted Successfully";
+}
+
+window.onload = function(){
+
+  updateInventory();
+
+};
+
+</script>
+
+</body>
+</html>

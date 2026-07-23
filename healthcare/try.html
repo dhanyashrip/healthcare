@@ -1,0 +1,108 @@
+<script>
+
+/* BOOK SERVICE */
+
+function bookService(){
+
+  if(selectedService===""){
+    alert("Please select a service first!");
+    return;
+  }
+
+  let duration =
+  document.getElementById("duration").value;
+
+  if(duration===""){
+    alert("Please select booking duration!");
+    return;
+  }
+
+  let assignedCaregiver = "";
+
+  if(selectedService === "Nursing Care"){
+    assignedCaregiver = "Anita (Nurse)";
+  }
+
+  else if(selectedService === "Attendant"){
+    assignedCaregiver = "Ravi (Attendant)";
+  }
+
+  else if(selectedService === "Physiotherapy"){
+    assignedCaregiver = "Meena (Physiotherapist)";
+  }
+
+  else if(selectedService === "Post Care"){
+    assignedCaregiver = "Anita (Recovery Nurse)";
+  }
+
+  /* ==================================== */
+  /* GET PATIENT NAME */
+  /* ==================================== */
+
+  let patientName =
+  document.getElementById("patientName").value;
+
+  if(patientName === ""){
+    patientName = "Guest User";
+  }
+
+  /* ==================================== */
+  /* SAVE BOOKING INTO LOCAL STORAGE */
+  /* ==================================== */
+
+  let bookingData =
+  JSON.parse(localStorage.getItem("bookingData")) || [];
+
+  bookingData.push({
+
+    patient: patientName,
+
+    service: selectedService,
+
+    duration: duration,
+
+    caregiver: assignedCaregiver,
+
+    status: "Confirmed"
+
+  });
+
+  localStorage.setItem(
+    "bookingData",
+    JSON.stringify(bookingData)
+  );
+
+  /* ==================================== */
+  /* BOOKING SUCCESS MESSAGE */
+  /* ==================================== */
+
+  document.getElementById("bookingStatus").innerHTML =
+  `
+  ✅ Booking Confirmed! <br><br>
+
+  👨‍⚕️ Assigned Caregiver:
+  <b>${assignedCaregiver}</b><br><br>
+
+  📞 The caregiver will contact you shortly.
+  `;
+
+  setTimeout(()=>{
+
+    document.getElementById("bookingStatus").innerHTML =
+    `
+    ✅ Caregiver Assigned Successfully <br><br>
+
+    👨‍⚕️ ${assignedCaregiver}
+    is ready to assist you.
+    `;
+
+  },3000);
+
+  document.getElementById("duration").value="";
+
+  document.getElementById("selectedService").innerText="";
+
+  selectedService="";
+}
+
+</script>

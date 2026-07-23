@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login - Vatsalya Care</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#dff6f0,#f0f7ff);
+  font-family:'Times New Roman', serif;
+  padding:20px;
+  position:relative;
+}
+
+/* TOP RIGHT BACK ARROW */
+
+.top-back{
+  position:fixed;
+  top:25px;
+  right:25px;
+  z-index:1000;
+}
+
+.top-back a{
+  text-decoration:none;
+}
+
+.top-back button{
+  width:55px;
+  height:55px;
+  border:none;
+  border-radius:50%;
+  background:rgba(31, 95, 91, 0.082);
+  color:rgb(7, 7, 7);
+  font-size:28px;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,0.25);
+  backdrop-filter:blur(6px);
+}
+
+.top-back button:hover{
+  transform:scale(1.08);
+  background:rgba(31, 95, 91, 0.062);
+}
+
+/* LOGIN BOX */
+
+.login-container{
+  width:100%;
+  max-width:500px;
+  max-height:400px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  padding:40px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+
+.login-container h1{
+  text-align:center;
+  color:#162c2a;
+  margin-bottom:10px;
+  font-family:'Playfair Display', serif;
+}
+
+.login-container p{
+  text-align:center;
+  color:#555;
+  margin-bottom:30px;
+}
+
+/* INPUTS */
+
+input{
+  width:100%;
+  padding:14px;
+  margin:12px 0;
+  border-radius:10px;
+  border:1px solid #ccc;
+  outline:none;
+  font-size:15px;
+  font-family:'Times New Roman', serif;
+}
+
+/* BUTTON */
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#2b7a78,#3aafa9);
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  margin-top:15px;
+  transition:0.3s;
+  font-family:'Playfair Display', serif;
+}
+
+button:hover{
+  transform:scale(1.03);
+}
+
+/* MESSAGE */
+
+#loginMsg{
+  margin-top:18px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.top-back{
+  top:15px;
+  right:15px;
+}
+
+.top-back button{
+  width:48px;
+  height:48px;
+  font-size:24px;
+}
+
+.login-container{
+  padding:30px 25px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP RIGHT BACK ARROW -->
+
+<div class="top-back">
+<a href="login.html">
+<button>⬅</button>
+</a>
+</div>
+
+<div class="login-container">
+
+<h1>🔐 Admin Login</h1>
+
+<p>Vatsalya Care Administration Panel</p>
+
+<input type="text" id="adminId" placeholder="Enter Admin ID">
+
+<input type="password" id="adminPassword" placeholder="Enter Password">
+
+<button onclick="adminLogin()">
+Login
+</button>
+
+<p id="loginMsg"></p>
+
+</div>
+
+<script>
+
+function adminLogin(){
+
+  let adminId =
+  document.getElementById("adminId").value;
+
+  let password =
+  document.getElementById("adminPassword").value;
+
+  let msg =
+  document.getElementById("loginMsg");
+
+  if(adminId === "" || password === ""){
+
+    msg.style.color = "red";
+
+    msg.innerText =
+    "Please fill all credentials";
+
+    return;
+  }
+
+  /* ADMIN CREDENTIALS */
+
+  if(adminId === "admin101" &&
+     password === "admin123"){
+
+    msg.style.color = "green";
+
+    msg.innerText =
+    "Login Successful";
+
+    setTimeout(()=>{
+
+      /* REDIRECT TO ADMIN DASHBOARD */
+
+      window.location.href =
+      "admindash.html";
+
+    },1000);
+
+  }
+
+  else{
+
+    msg.style.color = "red";
+
+    msg.innerText =
+    "Invalid Admin ID or Password";
+  }
+}
+
+</script>
+
+</body>
+</html>

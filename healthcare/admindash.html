@@ -1,0 +1,560 @@
+<!-- ========================================= -->
+<!-- ADMIN DASHBOARD WITH LIVE DATA FETCH -->
+<!-- SAVE AS: admin.html -->
+<!-- ========================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vatsalya Care - Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Times New Roman', serif;
+  background:linear-gradient(135deg,#dff6f0,#f0f7ff);
+  min-height:100vh;
+  display:flex;
+}
+
+/* TOP RIGHT BACK ARROW */
+
+.top-back{
+  position:fixed;
+  top:25px;
+  right:25px;
+  z-index:1000;
+}
+
+.top-back a{
+  text-decoration:none;
+}
+
+.top-back button{
+  width:55px;
+  height:55px;
+  border:none;
+  border-radius:50%;
+  background:rgba(31, 95, 91, 0.032);
+  color:rgb(6, 6, 6);
+  font-size:28px;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 5px 15px rgba(0,0,0,0.25);
+  backdrop-filter:blur(6px);
+}
+
+.top-back button:hover{
+  transform:scale(1.08);
+  background:#3aafa908;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:240px;
+  background:#1f4543;
+  min-height:100vh;
+  padding-top:30px;
+  position:fixed;
+  left:0;
+  top:0;
+}
+
+.sidebar h2{
+  color:white;
+  text-align:center;
+  margin-bottom:35px;
+  font-family:'Playfair Display', serif;
+}
+
+.sidebar a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  padding:16px 25px;
+  font-size:17px;
+  transition:0.3s;
+}
+
+.sidebar a:hover{
+  background:#3aafa9;
+}
+
+/* MAIN */
+
+.main{
+  margin-left:240px;
+  width:calc(100% - 240px);
+  padding:30px;
+}
+
+/* HEADER */
+
+.header{
+  background:linear-gradient(135deg,#275b59,#31928d);
+  color:white;
+  padding:25px;
+  border-radius:18px;
+  margin-bottom:30px;
+}
+
+.header h1{
+  font-size:34px;
+  font-family:'Playfair Display', serif;
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+}
+
+.card h3{
+  color:#1c423f;
+  margin-bottom:12px;
+  font-family:'Playfair Display', serif;
+}
+
+.card p{
+  font-size:30px;
+  font-weight:bold;
+}
+
+/* TABLE */
+
+.table-card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  margin-top:30px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+}
+
+.table-card h2{
+  margin-bottom:20px;
+  color:#1f4a48;
+  font-family:'Playfair Display', serif;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  background:#1f4d4b;
+  color:white;
+  padding:14px;
+  text-align:left;
+}
+
+td{
+  padding:14px;
+  border-bottom:1px solid #ccc;
+}
+
+tr:hover{
+  background:#f4fdfc;
+}
+
+/* BUTTON */
+
+.logout-btn{
+  margin-top:25px;
+  background:linear-gradient(135deg,#c0392b,#e74c3c);
+  color:white;
+  border:none;
+  padding:14px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.refresh-btn{
+  margin-top:20px;
+  background:linear-gradient(135deg,#34495e,#5d6d7e);
+  color:white;
+  border:none;
+  padding:14px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+  margin-right:10px;
+}
+
+button:hover{
+  transform:scale(1.03);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.sidebar{
+  width:200px;
+}
+
+.main{
+  margin-left:200px;
+  width:calc(100% - 200px);
+}
+
+.top-back{
+  top:15px;
+  right:15px;
+}
+
+.top-back button{
+  width:48px;
+  height:48px;
+  font-size:24px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP RIGHT BACK ARROW -->
+
+<div class="top-back">
+<a href="login.html">
+<button>⬅</button>
+</a>
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>VATSALYA CARE</h2>
+
+<a href="#">🏠 Dashboard</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h1>Admin Dashboard</h1>
+
+<p>
+Live Healthcare Management System
+</p>
+
+</div>
+
+<!-- STATS -->
+
+<div class="grid">
+
+<div class="card">
+<h3>Total Nurses</h3>
+<p id="totalNurses">0</p>
+</div>
+
+<div class="card">
+<h3>Total Bookings</h3>
+<p id="totalBookings">0</p>
+</div>
+
+<div class="card">
+<h3>Available Caregivers</h3>
+<p id="availableCount">0</p>
+</div>
+
+<div class="card">
+<h3>Nursing Care</h3>
+<p id="nursingCount">0</p>
+</div>
+
+<div class="card">
+<h3>Physiotherapy</h3>
+<p id="physioCount">0</p>
+</div>
+
+<div class="card">
+<h3>Elderly Care</h3>
+<p id="elderlyCount">0</p>
+</div>
+
+<div class="card">
+<h3>Post Surgery Care</h3>
+<p id="postCount">0</p>
+</div>
+
+<div class="card">
+<h3>Total Patients</h3>
+<p id="totalPatients">0</p>
+</div>
+
+</div>
+
+<!-- NURSE TABLE -->
+
+<div class="table-card">
+
+<h2>Registered Nurses</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Qualification</th>
+<th>Experience</th>
+<th>Specialization</th>
+<th>Availability</th>
+</tr>
+</thead>
+
+<tbody id="nurseTable">
+
+<tr>
+<td colspan="5" style="text-align:center;">
+No Nurse Data Available
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- BOOKING TABLE -->
+
+<div class="table-card">
+
+<h2>Recent Bookings</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Patient</th>
+<th>Service</th>
+<th>Duration</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="bookingTable">
+
+<tr>
+<td colspan="4" style="text-align:center;">
+No Booking Data Available
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<button class="refresh-btn" onclick="loadDashboardData()">
+🔄 Refresh Data
+</button>
+
+<button class="logout-btn" onclick="logoutAdmin()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function loadDashboardData(){
+
+    let patients =
+    JSON.parse(localStorage.getItem("patients")) || [];
+
+    let nurses =
+    JSON.parse(localStorage.getItem("nurses")) || [];
+
+    let bookings =
+    JSON.parse(localStorage.getItem("bookingData")) || [];
+
+    let nurseTable =
+    document.getElementById("nurseTable");
+
+    let bookingTable =
+    document.getElementById("bookingTable");
+
+    nurseTable.innerHTML = "";
+    bookingTable.innerHTML = "";
+
+    let available = 0;
+    let nursing = 0;
+    let physio = 0;
+    let elderly = 0;
+    let post = 0;
+
+    /* ==========================
+       UPDATE STAT CARDS
+    ========================== */
+
+    document.getElementById("totalPatients").innerText =
+    patients.length;
+
+    document.getElementById("totalNurses").innerText =
+    nurses.length;
+
+    document.getElementById("totalBookings").innerText =
+    bookings.length;
+
+    /* ==========================
+       LOAD NURSES
+    ========================== */
+
+    if(nurses.length === 0){
+
+        nurseTable.innerHTML = `
+        <tr>
+            <td colspan="5" style="text-align:center;">
+                No Nurse Data Available
+            </td>
+        </tr>`;
+    }
+    else{
+
+        nurses.forEach(nurse => {
+
+            if(
+                nurse.availability &&
+                nurse.availability.includes("Available")
+            ){
+                available++;
+            }
+
+            nurseTable.innerHTML += `
+            <tr>
+                <td>${nurse.name || ""}</td>
+                <td>${nurse.qualification || ""}</td>
+                <td>${nurse.experience || ""}</td>
+                <td>${nurse.specialization || ""}</td>
+                <td>${nurse.availability || ""}</td>
+            </tr>`;
+        });
+    }
+
+    /* ==========================
+       LOAD BOOKINGS
+    ========================== */
+
+    if(bookings.length === 0){
+
+        bookingTable.innerHTML = `
+        <tr>
+            <td colspan="4" style="text-align:center;">
+                No Booking Data Available
+            </td>
+        </tr>`;
+    }
+    else{
+
+        bookings.forEach(book => {
+
+            if(book.service === "Nursing Care"){
+                nursing++;
+            }
+            else if(book.service === "Physiotherapy"){
+                physio++;
+            }
+            else if(book.service === "Elderly Care" ||
+                    book.service === "Attendant"){
+                elderly++;
+            }
+            else if(book.service === "Post Surgery Care" ||
+                    book.service === "Post Care"){
+                post++;
+            }
+
+            bookingTable.innerHTML += `
+            <tr>
+                <td>${book.patient || ""}</td>
+                <td>${book.service || ""}</td>
+                <td>${book.duration || ""}</td>
+                <td>Confirmed</td>
+            </tr>`;
+        });
+    }
+
+    /* ==========================
+       UPDATE SERVICE COUNTS
+    ========================== */
+
+    document.getElementById("availableCount").innerText =
+    available;
+
+    document.getElementById("nursingCount").innerText =
+    nursing;
+
+    document.getElementById("physioCount").innerText =
+    physio;
+
+    document.getElementById("elderlyCount").innerText =
+    elderly;
+
+    document.getElementById("postCount").innerText =
+    post;
+}
+
+/* ==========================
+   PAGE LOAD
+========================== */
+
+window.onload = function(){
+    loadDashboardData();
+};
+
+/* ==========================
+   AUTO REFRESH
+========================== */
+
+setInterval(loadDashboardData, 1000);
+
+/* ==========================
+   LOGOUT
+========================== */
+
+function logoutAdmin(){
+
+    alert("Admin Logged Out Successfully");
+
+    window.location.href = "adminlogin.html";
+}
+
+</script>
+
+</body>
+</html>
